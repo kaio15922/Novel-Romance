@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+import javax.sound.sampled.*;
+import java.net.URL;
+import java.io.IOException;
 
 public class TelaInicial
 {
@@ -46,6 +49,17 @@ public class TelaInicial
         camadas.add(conquistas, JLayeredPane.PALETTE_LAYER);
 
         janela.add(camadas);
+
+        try {
+            URL url = TelaInicial.class.getResource("/Resources/Music/DokiDoki.wav");
+            AudioInputStream audio = AudioSystem.getAudioInputStream(url);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audio);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
         janela.setVisible(true);
     }
