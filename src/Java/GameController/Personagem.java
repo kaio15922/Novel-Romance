@@ -1,7 +1,7 @@
 package GameController;
 
 //Super Classe
-public class Personagem {
+public abstract class Personagem {
 
     //Objeto Personagem (Menina) que possui Nome, Pontuação e idade.
     String nome;
