@@ -43,8 +43,8 @@ public class MainTeste extends Sakura {
 
             //Imprime a reação da personagem
             escolhasCap[i][j-1].responder();
-
+            
+            scanner.close();
         }
-
     }
 }
