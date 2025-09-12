@@ -1,9 +1,9 @@
 package gui;
 
-import javax.swing.*;
-import javax.sound.sampled.*;
-import java.net.URL;
 import java.io.IOException;
+import java.net.URL;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class TelaInicial
 {
