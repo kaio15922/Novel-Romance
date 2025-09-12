@@ -28,7 +28,7 @@ public class EscolhaRuim extends Escolhas {
         @Override
     public void responder(){
 
-        System.out.println(this.resposta);
+        System.out.println(this.resposta + "\n");
 
     }
 }
