@@ -4,9 +4,9 @@ package GameController;
 public abstract class Personagem {
 
     //Objeto Personagem (Menina) que possui Nome, Pontuação e idade.
-    String nome;
-    int idade;
-    int pontuacao;
+    private String nome;
+    private int idade;
+    private int pontuacao;
 
     //Construtor
     public Personagem(String nome, int idade, int pontuacaoInicial){

@@ -20,14 +20,9 @@ public class MainTeste extends Sakura {
         escolhasCap1[0][0] = new EscolhaBoa(sakura, 1, 1, "1. Eu te amo", "Não ligo");
         escolhasCap1[0][1] = new EscolhaRuim(sakura, 1, 1, "2. Cala a boca", "Sucumba!");
         escolhasCap1[0][2] = new EscolhaNeutra(sakura, 1, 1, "3. Oi","Bobão");
-
-        Player(capitulo, escolhasCap1);
-
     }
 
-    public static void Player(String capitulo[], Escolhas[][] escolhasCap){
-
-        for(int i = 0; i < capitulo.length; i++){
+    public static void Player(String capitulo[], Escolhas[][] escolhasCap, int i){
 
             //Imprime dialogo
             System.out.println(capitulo[i]);
@@ -45,6 +40,6 @@ public class MainTeste extends Sakura {
             escolhasCap[i][j-1].responder();
             
             scanner.close();
-        }
+        
     }
 }

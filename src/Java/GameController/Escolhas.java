@@ -21,7 +21,7 @@ abstract class Escolhas {
     //Declaração de metodo paras as filhas
     public abstract void pontuar();
 
-    public abstract void imprimir();
+    public abstract String imprimir();
 
-    public abstract void responder();
+    public abstract String responder();
 }

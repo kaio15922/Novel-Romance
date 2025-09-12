@@ -5,32 +5,27 @@ public class EscolhaRuim extends Escolhas {
 
     public EscolhaRuim(Personagem personagem, int capitulo, int posicao, String texto, String resposta) {
         super(personagem, capitulo, posicao, texto, resposta);
-
-        this.capitulo = capitulo;
-        this.posicao = posicao;
-        this.texto = texto;
-        this.resposta = resposta;
-
     }
 
     @Override
     public void pontuar(){
   
-        personagem.pontuacao+= -10;
-
+        int pont = personagem.getPontuacao();
+        pont -= 10;
+        personagem.setPontuacao(pont);
     }   
 
     @Override
-    public void imprimir(){
+    public String imprimir(){
 
-        System.out.println(this.texto);
+        return texto;
 
     }
 
         @Override
-    public void responder(){
+    public String responder(){
 
-        System.out.println(this.resposta);
+        return resposta;
 
     }
 }
