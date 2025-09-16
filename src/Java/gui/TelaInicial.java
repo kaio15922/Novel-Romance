@@ -4,77 +4,56 @@ import java.net.URL;
 import javax.sound.sampled.*;
 import javax.swing.*;
 
-public class TelaInicial implements Tela
+public class TelaInicial
 {
-    // Criação de objetos janela, texto, camadas // Variavel clip para musica
-    JFrame janela = new JFrame();
-    JLayeredPane camadas = new JLayeredPane();
-    private Clip clip;
+    Clip clip;
 
-    // Criação de objeto cap1 para acessar capitulo 1
-    Tela cap1 = new TelaCapitulo1();
-
-    public void exibirJanela()
+    public JPanel Inicio(Telas controle)
     {
-        // Configs janela
-        janela.setLayout(null);        
-        janela.setTitle("Doce Amor");
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setResizable(false);
-        janela.setSize(1024, 700);
-
-        // Setando limites das camadas
-        camadas.setBounds(0,0,1024,700);
+        JPanel telaInicial = new JPanel(null);
 
         // Plano de fundo
         ImageIcon planoDeFundo = new ImageIcon(getClass().getResource("/Resources/Background/Inicio.png"));
         JLabel imagem = new JLabel(planoDeFundo);
         imagem.setBounds(0, 0, planoDeFundo.getIconWidth(), planoDeFundo.getIconHeight());
 
-        // Configs botão inciar
+        // Iniciar
         JButton iniciar = new JButton("");
         iniciar.setSize(190,50);
         iniciar.setLocation(415, 190);
         iniciar.setContentAreaFilled(false);
         iniciar.setOpaque(false);
-        iniciar.addActionListener(e -> {
-            janela.setVisible(false);
-            if(clip != null && clip.isRunning())
-            {
-                clip.close();
-            }
-            cap1.exibirJanela();
-        });
 
-        // Configs botão continuar
+        // Avança para o capítulo 1
+        iniciar.addActionListener(e -> {
+            clip.stop();
+            controle.mostraCard("cap1");
+        });
+        
+        // Continuar
         JButton continuar = new JButton("");
         continuar.setSize(190,50);
         continuar.setLocation(295, 260);
         continuar.setContentAreaFilled(false);
         continuar.setOpaque(false);
-        continuar.addActionListener(e -> {
-            System.out.println("Continuar Clicado");
-        });
-
-        // Configs botão conquistas
+        
+        // Conquistas
         JButton conquistas = new JButton("");
         conquistas.setSize(190,50);
         conquistas.setLocation(535, 260);
         conquistas.setContentAreaFilled(false);
         conquistas.setOpaque(false);
-        conquistas.addActionListener(e -> {
-            System.out.println("Conquistas Clicado");
-        });
 
-        // Organizando itens nas camadas
-        camadas.add(imagem, JLayeredPane.DEFAULT_LAYER);
-        camadas.add(iniciar, JLayeredPane.PALETTE_LAYER);
-        camadas.add(continuar, JLayeredPane.PALETTE_LAYER);
-        camadas.add(conquistas, JLayeredPane.PALETTE_LAYER);
+        // Add camadas
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0 , 1000, 700);
 
-        janela.add(camadas);
+        layeredPane.add(imagem, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(iniciar, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(continuar, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(conquistas, JLayeredPane.PALETTE_LAYER);
 
-        // Colocando música e tratando ela caso dê algum bug
+        // Pondo musica e trantando ela
         try {
             URL url = TelaInicial.class.getResource("/Resources/Music/DokiDoki.wav");
             AudioInputStream audio = AudioSystem.getAudioInputStream(url);
@@ -88,7 +67,8 @@ public class TelaInicial implements Tela
             e.getMessage();
         }
 
-        // Fazendo tela aparecer
-        janela.setVisible(true);
+        telaInicial.add(layeredPane);
+
+        return telaInicial;
     }
 }

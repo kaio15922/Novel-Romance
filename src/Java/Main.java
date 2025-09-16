@@ -1,11 +1,10 @@
-import gui.Tela;
-import gui.TelaInicial;
+import gui.*;
 
 public class Main
 {
     public static void main(String[] args) 
     {
-        Tela tela = new TelaInicial();
-        tela.exibirJanela();
+        Telas tela = new Telas();
+        tela.Janela();
     }
 }
