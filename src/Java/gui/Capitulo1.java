@@ -4,14 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import GameController.*;
 
 public class Capitulo1
 {
     // Dialogos
-    private ArrayList<String> dialogosCap1 = new ArrayList<>(List.of("Salve","como vai", "Safe"));
+    private ArrayList<String> dialogosCap1 = new ArrayList<>(List.of("“Nossa, nem estou acreditando que estou aqui!”",
+    "“nessa manhã minha mãe não parava de ligar com medo de eu me atrasar, já que é minha primeira vez morando longe dela, mas que bom que deu tudo certo”", 
+    "“todo aquele estudo para passar no vestibular enfim valeu a pena, não posso esperar para o que estar por vim”."
+    ));
     private int indiceDialogo = 0;
-
-    public JPanel painelCap1(Telas controle)
+    
+    public JPanel painelCap1(Telas controle, Sakura sakura)
     {
         JPanel cap1 = new JPanel(null);
         
@@ -27,7 +31,7 @@ public class Capitulo1
 
         // Texto da caixa
         JTextArea caixaDeDialogo = new JTextArea(dialogosCap1.get(indiceDialogo));
-        caixaDeDialogo.setBounds(200, 520, 500, 100);
+        caixaDeDialogo.setBounds(200, 510, 500, 100);
         caixaDeDialogo.setEditable(false);
         caixaDeDialogo.setLineWrap(true);
         caixaDeDialogo.setWrapStyleWord(true);
@@ -39,6 +43,8 @@ public class Capitulo1
         Next.setBounds(810, 620, 35, 25);
         Next.setContentAreaFilled(false);
         Next.setOpaque(false);
+        // Aqui é o fluxo do jogo de acordo com as escolhas do personagem, métodos são chamados para acumular valor que podem determinar diferentes caminhos,
+        // Os valores são guardados em objetos únicos
         Next.addActionListener(e ->{
             indiceDialogo++;
             if(indiceDialogo < dialogosCap1.size())
