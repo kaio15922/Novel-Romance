@@ -1,11 +1,10 @@
-import gui.TelaInicial;
+import gui.*;
 
 public class Main
 {
     public static void main(String[] args) 
     {
-        TelaInicial p = new TelaInicial();
-
-        p.Janela();
+        Telas tela = new Telas();
+        tela.Janela();
     }
 }

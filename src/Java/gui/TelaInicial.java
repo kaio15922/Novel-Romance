@@ -1,66 +1,74 @@
 package gui;
 
-import javax.swing.*;
-import javax.sound.sampled.*;
 import java.net.URL;
-import java.io.IOException;
+import javax.sound.sampled.*;
+import javax.swing.*;
 
 public class TelaInicial
 {
-    JFrame janela = new JFrame();
-    JLabel texto = new JLabel();
-    JLayeredPane camadas = new JLayeredPane();
+    Clip clip;
 
-    public void Janela()
+    public JPanel Inicio(Telas controle)
     {
-        janela.setLayout(null);        
-        janela.setTitle("Doce Amor");
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setResizable(false);
-        janela.setSize(1024, 1024);
+        JPanel telaInicial = new JPanel(null);
 
-        camadas.setBounds(0,0,1024,1024);
-
+        // Plano de fundo
         ImageIcon planoDeFundo = new ImageIcon(getClass().getResource("/Resources/Background/Inicio.png"));
         JLabel imagem = new JLabel(planoDeFundo);
         imagem.setBounds(0, 0, planoDeFundo.getIconWidth(), planoDeFundo.getIconHeight());
 
+        // Iniciar
         JButton iniciar = new JButton("");
-        iniciar.setSize(260,50);
-        iniciar.setLocation(390, 505);
+        iniciar.setSize(190,50);
+        iniciar.setLocation(415, 190);
         iniciar.setContentAreaFilled(false);
         iniciar.setOpaque(false);
 
+        // Avança para o capítulo 1
+        iniciar.addActionListener(e -> {
+            clip.stop();
+            controle.mostraCard("cap1");
+        });
+        
+        // Continuar
         JButton continuar = new JButton("");
-        continuar.setSize(230,50);
-        continuar.setLocation(270, 582);
+        continuar.setSize(190,50);
+        continuar.setLocation(295, 260);
         continuar.setContentAreaFilled(false);
         continuar.setOpaque(false);
-
+        
+        // Conquistas
         JButton conquistas = new JButton("");
-        conquistas.setSize(245,50);
-        conquistas.setLocation(510, 582);
+        conquistas.setSize(190,50);
+        conquistas.setLocation(535, 260);
         conquistas.setContentAreaFilled(false);
         conquistas.setOpaque(false);
 
-        camadas.add(imagem, JLayeredPane.DEFAULT_LAYER);
-        camadas.add(iniciar, JLayeredPane.PALETTE_LAYER);
-        camadas.add(continuar, JLayeredPane.PALETTE_LAYER);
-        camadas.add(conquistas, JLayeredPane.PALETTE_LAYER);
+        // Add camadas
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0, 0 , 1000, 700);
 
-        janela.add(camadas);
+        layeredPane.add(imagem, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(iniciar, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(continuar, JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(conquistas, JLayeredPane.PALETTE_LAYER);
 
+        // Pondo musica e trantando ela
         try {
             URL url = TelaInicial.class.getResource("/Resources/Music/DokiDoki.wav");
             AudioInputStream audio = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audio);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.start();
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-            e.printStackTrace();
+        } 
+        catch(Exception e) 
+        {
+            e.getMessage();
         }
 
-        janela.setVisible(true);
+        telaInicial.add(layeredPane);
+
+        return telaInicial;
     }
 }

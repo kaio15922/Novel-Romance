@@ -2,13 +2,30 @@ package GameController;
 
 public class EscolhaNeutra extends Escolhas {
   
-    public EscolhaNeutra(Personagem nomeDoPersonagem) {
-        super(nomeDoPersonagem);
+
+    public EscolhaNeutra(Personagem personagem, int capitulo, int posicao, String texto, String resposta) {
+        super(personagem, capitulo, posicao, texto, resposta);
     }
 
     @Override
     public void pontuar(){
 
-        System.out.println(personagem.nome + ": Legal. Pontuação atual: " + personagem.pontuacao);
+        int pont = personagem.getPontuacao();
+        pont += 2;
+        personagem.setPontuacao(pont);
     } 
+   
+    @Override
+    public String imprimir(){
+
+        return texto;
+
+    }
+
+        @Override
+    public String responder(){
+
+        return resposta;
+
+    }
 }

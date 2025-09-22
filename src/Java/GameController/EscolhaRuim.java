@@ -2,15 +2,30 @@ package GameController;
 
 public class EscolhaRuim extends Escolhas {
   
-    public EscolhaRuim(Personagem nomeDoPersonagem) {
-        super(nomeDoPersonagem);
+
+    public EscolhaRuim(Personagem personagem, int capitulo, int posicao, String texto, String resposta) {
+        super(personagem, capitulo, posicao, texto, resposta);
     }
 
     @Override
     public void pontuar(){
   
-        personagem.pontuacao+= -10;
-
-        System.out.println(personagem.nome + ": Eu te odeio! Pontuação atual: " + personagem.pontuacao);
+        int pont = personagem.getPontuacao();
+        pont -= 10;
+        personagem.setPontuacao(pont);
     }   
+
+    @Override
+    public String imprimir(){
+
+        return texto;
+
+    }
+
+        @Override
+    public String responder(){
+
+        return resposta;
+
+    }
 }
